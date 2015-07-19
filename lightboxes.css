@@ -1,0 +1,79 @@
+/*
+LightboxeS V 0.1 'Florence'
+This file features the CSS for the lightbox itself 
+Just add it to your project files and include it at the end of your body.
+Created by Daniel Swoboda - @snoato
+*/
+
+#lightboxesBox {
+    position: fixed; 
+    top: 0px; 
+    left: 0px; 
+    height: 100%; 
+    width: 100%; 
+    z-index: 10000; 
+    background-color: rgba(0,0,0,0.9);
+    overflow: hidden;
+}
+.lightboxesImg {
+    position: absolute;
+}
+#lightboxesImgWrapper {
+    height: 90%;
+    width: 90%;
+    left: 5%;
+    top: 5%;
+    position: absolute;
+    background-size: contain;
+
+    position: absolute;
+}
+.lightboxesButton {
+    height: 40px;
+    width: 40px;
+    background-color: rgba(0,0,0,0);
+    border: none;
+    box-shadow: none;
+
+    background-size: contain;
+
+    position: absolute;
+    top: calc(50% - 20px);
+    z-index: 100;
+}
+#lightboxesButtonBack {   
+    background-image: url(arrow_back.png);
+    left: 20px;
+}
+#lightboxesButtonForward {   
+    background-image: url(arrow_forward.png);
+    right: 20px;
+}
+#lightboxesButtonClose {
+    background-image: url(close.png);
+    position: absolute;
+    background-size: cover;
+    background-color: rgba(0,0,0,0);
+    border: none;
+    box-shadow: none;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    height: 20px;
+    width: 20px;
+}
+#lightboxesLoading {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(25,25,25,0.98);
+}
+#lightboxesLoadingInner{
+    color: white; 
+    font-family: sans-serif;
+    font-weight: 200;
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    top: calc(50% - 10px);
+}
