@@ -15,6 +15,7 @@ Usage notices:
 * It's recommended to put your JS include after the last use of a lightboxes div, preferably right after the body of your HTML.
 
 ##Demo time
+###[Live Demo](http://www.snoato.com/lightboxesdemo/ "Live Demo for LightboxeS")
 ```HTML
 <html>
     <head>
