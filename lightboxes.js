@@ -120,37 +120,20 @@ function lbs_resize(img) {
         g = d.getElementsByTagName('body')[0],
         width = parseInt((w.innerWidth || e.clientWidth || g.clientWidth)),
         height = parseInt((w.innerHeight|| e.clientHeight|| g.clientHeight));
-
-
-    var newWidth = img.style.width;
-    var newLeftDist = img.style.left;
-    var newHeight = img.style.height;
-    var newTopDist = img.style.top;
-    if((imgWidth >= (width - width*0.1) && imgHeight <= (height - width*0.1))){
+    
+    var wrapperWidth = width*0.9;
+    var wrapperHeight = height*0.9;
+    
+    if(imgHeight/imgWidth < wrapperHeight/wrapperWidth) {
         img.style.width = "100%";
-        img.style.left = "0%";
         img.style.height = "auto";
-        img.style.top = ((parseInt(imgWrapper.clientHeight) - parseInt(img.clientHeight))/2);
-    } else if((imgWidth <= (width - width*0.1) && imgHeight >= (height - width*0.1))){
-        img.style.height = "100%";
-        img.style.top = "0%";
-        img.style.width = "auto";
-        img.style.left = ((parseInt(imgWrapper.clientWidth) - parseInt(img.clientWidth))/2);
-    } else if((imgWidth <= (width - width*0.1) && imgHeight <= (height - width*0.1))){
-        img.style.left = ((parseInt(imgWrapper.clientWidth) - parseInt(img.clientWidth))/2);
-        img.style.top = ((parseInt(imgWrapper.clientHeight) - parseInt(img.clientHeight))/2);
+        img.style.left = "0%";
+        img.style.top = ((parseInt(imgWrapper.clientHeight) - parseInt(img.clientHeight))/2)+"px";
     } else {
-        if(imgWidth >= imgHeight){
-            img.style.width = "100%";
-            img.style.left = "0%";
-            img.style.height = "auto";
-            img.style.top = ((parseInt(imgWrapper.clientHeight) - parseInt(img.clientHeight))/2);
-        } else {
-            img.style.height = "100%";
-            img.style.top = "0%";
-            img.style.width = "auto";
-            img.style.left = ((parseInt(imgWrapper.clientWidth) - parseInt(img.clientWidth))/2);
-        }
+        img.style.height = "100%";
+        img.style.width = "auto";
+        img.style.top = "0%";
+        img.style.left = ((parseInt(imgWrapper.clientWidth) - parseInt(img.clientWidth))/2)+"px";
     }
 }
 
