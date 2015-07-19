@@ -30,8 +30,27 @@ function lbs_init() {
     }
 }
 
+//Key event listener for keyboard based navigation
+function lbs_keyEvent(event){
+    switch (event.keyCode) {
+    case 37:
+        lbs_slide("back");
+        break;
+    case 39:
+        lbs_slide("forward");
+        break;
+    case 27:
+        lbs_dispose();
+        break;
+    default:
+        return;
+    }
+}
+
 //removes the lightbox and reinits the images
 function lbs_dispose() {
+    document.body.removeEventListener("keyup", lbs_keyEvent);//remove key event listener
+    
     var lbs_box = document.getElementById("lightboxesBox");
     lbs_box.parentElement.removeChild(lbs_box);  
     lbs_init();
@@ -39,6 +58,8 @@ function lbs_dispose() {
 
 //shows a new lightbox starting with the given caller (a lightbox img)
 function lbs_pose(caller) {
+    document.body.addEventListener("keyup", lbs_keyEvent);//add key event listener
+    
     var lbs_lightboxindex = parseInt(caller.getAttribute("lbs_lbx_index"));
 
 
@@ -132,13 +153,13 @@ function lbs_resize(img) {
 //slider function used with the buttons, changes displayed image index, calls swap method and corrects buttons
 function lbs_slide(direction) {
     document.getElementById("lightboxesLoading").style.display = "block";
-    if(direction == "forward"){
+    if(direction == "forward" && lbs_imgIndex < lbs_imgCounter-1){
         lbs_imgIndex++;
         if(lbs_imgIndex == lbs_imgCounter-1){
              document.getElementById("lightboxesButtonForward").style.display = "none";
         }
         document.getElementById("lightboxesButtonBack").style.display = "block";
-    } else if(direction == "back"){
+    } else if(direction == "back" && lbs_imgIndex > 0){
         lbs_imgIndex--;
         if(lbs_imgIndex==0){   
             document.getElementById("lightboxesButtonBack").style.display = "none";
