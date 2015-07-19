@@ -2,7 +2,7 @@
 ![LightboxeS Logo](http://www.snoato.com/stuff/LightboxeS/LightboxeS01Logo.png "LightboxeS Logo")
 ######Notice: This is an early version, that means the code is ugly and there are (minor) bugs (especially when it comes to event based resizement) with some browsers.
 #####Tested with: Chrome 43, Safari 8, Internet Explorer 11, Firefox 39, Vavaldi TP4
-**LightboxeS** is a simple JavaScript lightbox system, that's made as simple as it can be. Just put your images into a tag with the "lightboxes" class, add the lightboxes.js and the lightboxes.css and it's done. 
+**LightboxeS** is a simple JavaScript lightbox system, that's made as simple as it can be. Just put your images into a tag with the "lightboxes" class, add the lightboxes.js and the lightboxes.css and it's done. Users can navigate using on screen buttons as well as the arrow keys on the keyboard.
 
 It's that easy.
 
