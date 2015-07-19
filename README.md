@@ -78,6 +78,7 @@ Notice that the second gallery features 3 images although two of them are in an 
 * Optional preview pics on the bottom
 * Optional 'progress' bar
 * Optional image hovering effect
+* Optional image title and description
 * *Making it faster on slower browsers*
 
 ##Already done
