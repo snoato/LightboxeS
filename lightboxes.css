@@ -42,15 +42,15 @@ Created by Daniel Swoboda - @snoato
     z-index: 100;
 }
 #lightboxesButtonBack {   
-    background-image: url(arrow_back.png);
+    background-image: url(lbs_arrow_back.png);
     left: 20px;
 }
 #lightboxesButtonForward {   
-    background-image: url(arrow_forward.png);
+    background-image: url(lbs_arrow_forward.png);
     right: 20px;
 }
 #lightboxesButtonClose {
-    background-image: url(close.png);
+    background-image: url(lbs_close.png);
     position: absolute;
     background-size: cover;
     background-color: rgba(0,0,0,0);
