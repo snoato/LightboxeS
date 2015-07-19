@@ -1,10 +1,11 @@
 # LightboxeS
 ![LightboxeS Logo](http://www.snoato.com/stuff/LightboxeS/LightboxeS01Logo.png "LightboxeS Logo")
-######Notice: This is an early version, that means the code is ugly and there are minor bugs with some browsers.
-#####Tested with: Chrome 43, Safari 8, Internet Explorer 11, Firefox 39, Vavaldi TP4
 **LightboxeS** is a simple JavaScript lightbox system, that's made as simple as it can be. Just put your images into a tag with the "lightboxes" class, add the lightboxes.js and the lightboxes.css and it's done. Users can navigate using on screen buttons as well as the arrow keys on the keyboard.
 
 It's that easy.
+
+######Notice: This is an early version, that means the code is ugly and there are minor bugs with some browsers.
+#####Tested with: Chrome 43, Safari 8, Internet Explorer 11, Firefox 39, Vavaldi TP4
 
 ##Usage
 Copy the lightboxes.js and lightboxes.css files and the icons into your project and include them. Add a div with the 'lightboxes' class that surrounds the images you want to have in one 'gallery'. You can, of course, add as many lightboxes as you like. 
