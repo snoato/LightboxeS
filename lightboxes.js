@@ -16,8 +16,8 @@ var lbs_images = null;
 var lbs_lightboxes = document.getElementsByClassName('lightboxes');
 
 //inits the lightboxes and adds tags needed
-function lbs_init(){
-    for(var i=0; i<lbs_lightboxes.length; i++){
+function lbs_init() {
+    for (var i = 0; i < lbs_lightboxes.length; i++){
         var lbs_pictures = lbs_lightboxes[i].getElementsByTagName('img');
         for(var j=0; j<lbs_pictures.length; j++){
             lbs_pictures[j].addEventListener("click", function(event){
@@ -31,29 +31,29 @@ function lbs_init(){
 }
 
 //removes the lightbox and reinits the images
-function lbs_dispose(){
+function lbs_dispose() {
     var lbs_box = document.getElementById("lightboxesBox");
     lbs_box.parentElement.removeChild(lbs_box);  
     lbs_init();
 }
 
 //shows a new lightbox starting with the given caller (a lightbox img)
-function lbs_pose(caller){
+function lbs_pose(caller) {
     var lbs_lightboxindex = parseInt(caller.getAttribute("lbs_lbx_index"));
 
 
     document.body.innerHTML = document.body.innerHTML + '<div id="lightboxesBox">\n<div id="lightboxesImgWrapper">\n<img class="lightboxesImg" id="lbs_currImg">\n</div>\n<div id="lightboxesLoading"><div id="lightboxesLoadingInner">Loading...</div></div>\n<button class="lightboxesButton" id="lightboxesButtonBack"></button>\n<button class="lightboxesButton" id="lightboxesButtonForward"></button>\n<button id="lightboxesButtonClose" onclick="lbs_dispose();"></button>\n</div>';
 
-    document.getElementById("lightboxesButtonBack").addEventListener("click", function(){
+    document.getElementById("lightboxesButtonBack").addEventListener("click", function() {
         lbs_slide("back");
     }); 
 
-    document.getElementById("lightboxesButtonForward").addEventListener("click", function(){
+    document.getElementById("lightboxesButtonForward").addEventListener("click", function() {
         lbs_slide("forward");
     });
 
 
-    window.addEventListener("resize", function(){
+    window.addEventListener("resize", function() {
         var img = document.getElementById("lbs_currImg"); 
         lbs_resize(img);
     });
@@ -65,16 +65,16 @@ function lbs_pose(caller){
 
     lbs_swap();
 
-    if(lbs_imgIndex == 0){
+    if(lbs_imgIndex == 0) {
         document.getElementById("lightboxesButtonBack").style.display = "none";   
     }
-    if(lbs_imgIndex == lbs_imgCounter-1){
+    if(lbs_imgIndex == lbs_imgCounter-1) {
         document.getElementById("lightboxesButtonForward").style.display = "none";   
     }
 } 
 
 //gets the sources of all images within the given lightbox
-function lbs_getSource(lbs_lightboxindex){
+function lbs_getSource(lbs_lightboxindex) {
     var lbs_pictures = lbs_lightboxes[lbs_lightboxindex].getElementsByTagName('img');
     var lbs_images = Array();
     for(var i=0; i<lbs_pictures.length; i++){
@@ -84,7 +84,7 @@ function lbs_getSource(lbs_lightboxindex){
 }
 
 //resizes the images in order to fit them perfectly on the screen (maybe too complicated)
-function lbs_resize(img){
+function lbs_resize(img) {
     var imgWidth = parseInt(img.width);
     var imgHeight = parseInt(img.height);
     var imgWrapper = document.getElementById('lightboxesImgWrapper');
@@ -130,7 +130,7 @@ function lbs_resize(img){
 }
 
 //slider function used with the buttons, changes displayed image index, calls swap method and corrects buttons
-function lbs_slide(direction){
+function lbs_slide(direction) {
     document.getElementById("lightboxesLoading").style.display = "block";
     if(direction == "forward"){
         lbs_imgIndex++;
@@ -149,7 +149,7 @@ function lbs_slide(direction){
 }
 
 //swaps the displayed image to the current image
-function lbs_swap(){
+function lbs_swap() {
     document.getElementById("lightboxesImgWrapper").innerHTML = '<img src="'+lbs_images[lbs_imgIndex]+'" class="lightboxesImg" id="lbs_currImg">';
     document.getElementById("lbs_currImg").addEventListener("load", function(){
         lbs_resize(document.getElementById("lbs_currImg"));
