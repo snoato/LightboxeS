@@ -21,6 +21,7 @@ function lbs_init(){
         var lbs_pictures = lbs_lightboxes[i].getElementsByTagName('img');
         for(var j=0; j<lbs_pictures.length; j++){
             lbs_pictures[j].addEventListener("click", function(event){
+                event.preventDefault();
                 lbs_pose(event.target || event.srcElement);
             });
             lbs_pictures[j].setAttribute("lbs_lbx_index", i.toString());
