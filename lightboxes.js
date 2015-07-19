@@ -33,13 +33,13 @@ function lbs_init() {
 //Key event listener for keyboard based navigation
 function lbs_keyEvent(event){
     switch (event.keyCode) {
-    case 37:
+    case 37://left arrow key
         lbs_slide("back");
         break;
-    case 39:
+    case 39://right arrow key
         lbs_slide("forward");
         break;
-    case 27:
+    case 27://esc key
         lbs_dispose();
         break;
     default:
@@ -58,40 +58,38 @@ function lbs_dispose() {
 
 //shows a new lightbox starting with the given caller (a lightbox img)
 function lbs_pose(caller) {
-    document.body.addEventListener("keyup", lbs_keyEvent);//add key event listener
-    
+    //get starting index from clicked image
     var lbs_lightboxindex = parseInt(caller.getAttribute("lbs_lbx_index"));
-
-
+    
+    //add lightbox html
     document.body.innerHTML = document.body.innerHTML + '<div id="lightboxesBox">\n<div id="lightboxesImgWrapper">\n<img class="lightboxesImg" id="lbs_currImg">\n</div>\n<div id="lightboxesLoading"><div id="lightboxesLoadingInner">Loading...</div></div>\n<button class="lightboxesButton" id="lightboxesButtonBack"></button>\n<button class="lightboxesButton" id="lightboxesButtonForward"></button>\n<button id="lightboxesButtonClose" onclick="lbs_dispose();"></button>\n</div>';
-
+    
+    //event listener
+    document.body.addEventListener("keyup", lbs_keyEvent);//add key event listener
     document.getElementById("lightboxesButtonBack").addEventListener("click", function() {
         lbs_slide("back");
     }); 
-
     document.getElementById("lightboxesButtonForward").addEventListener("click", function() {
         lbs_slide("forward");
     });
-
-
     window.addEventListener("resize", function() {
-        var img = document.getElementById("lbs_currImg"); 
-        lbs_resize(img);
+        lbs_resize(document.getElementById("lbs_currImg"));
     });
 
+    //update global variables
     lbs_imgCounter = lbs_lightboxes[lbs_lightboxindex].getElementsByTagName('img').length;
-
     lbs_imgIndex = parseInt(caller.getAttribute("lbs_pic_index"));
     lbs_images = lbs_getSource(lbs_lightboxindex);
-
-    lbs_swap();
-
+    
+    //check index and hide buttons if needed
     if(lbs_imgIndex == 0) {
         document.getElementById("lightboxesButtonBack").style.display = "none";   
     }
     if(lbs_imgIndex == lbs_imgCounter-1) {
         document.getElementById("lightboxesButtonForward").style.display = "none";   
     }
+    
+    lbs_swap();
 } 
 
 //gets the sources of all images within the given lightbox
@@ -113,6 +111,7 @@ function lbs_getSource(lbs_lightboxindex) {
 function lbs_resize(img) {
     var imgWidth = parseInt(img.width);
     var imgHeight = parseInt(img.height);
+    
     var imgWrapper = document.getElementById('lightboxesImgWrapper');
 
     var w = window,
@@ -179,9 +178,9 @@ function lbs_swap() {
     document.getElementById("lightboxesImgWrapper").innerHTML = '<img src="'+lbs_images[lbs_imgIndex]+'" class="lightboxesImg" id="lbs_currImg">';
     document.getElementById("lbs_currImg").addEventListener("load", function(){
         lbs_resize(document.getElementById("lbs_currImg"));
-        lbs_resize(document.getElementById("lbs_currImg"));
         document.getElementById("lightboxesLoading").style.display = "none";
     });  
 }
 
+//original init
 lbs_init();
