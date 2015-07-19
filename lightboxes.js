@@ -99,7 +99,12 @@ function lbs_getSource(lbs_lightboxindex) {
     var lbs_pictures = lbs_lightboxes[lbs_lightboxindex].getElementsByTagName('img');
     var lbs_images = Array();
     for(var i=0; i<lbs_pictures.length; i++){
-        lbs_images.push(lbs_pictures[i].getAttribute('src'));
+        var lbs_curr_pic = lbs_pictures[i];
+        if(lbs_curr_pic.getAttribute('lbs_high_res_src') == null){
+            lbs_images.push(lbs_curr_pic.getAttribute('src'));  
+        } else {
+            lbs_images.push(lbs_curr_pic.getAttribute('lbs_high_res_src'));
+        }
     }
     return lbs_images;
 }
