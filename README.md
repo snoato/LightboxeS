@@ -24,8 +24,7 @@ Optional (using a different source for lightbox gallery):
     <img src="1.JPG" lbs_high_res_src="1-highres.JPG">
 </div>
 ```
-
-Usage notices:
+####Usage notices:
 * Be aware that **LightboxeS** adds tags to the images. Keep in mind that all public JS has a 'lbs_' prefix and all CSS ids and classes start with 'lightboxes'.
 * You can change the appearance of the buttons by replacing the files. 
 * It's recommended to put your JS include after the last use of a lightboxes div, preferably right after the body of your HTML.
