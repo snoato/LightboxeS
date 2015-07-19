@@ -9,6 +9,22 @@ It's that easy.
 ##Usage
 Copy the lightboxes.js and lightboxes.css files and the icons into your project and include them. Add a div with the 'lightboxes' class that surrounds the images you want to have in one 'gallery'. You can, of course, add as many lightboxes as you like. 
 
+####Different image sources for lightbox gallery
+If you want to have other image sources used for the lightbox gallery view (for example to use higher resolution images) you can simply add the 'lbs_high_res_src' attribute to your img tags. This is completetly optional and does not require any additional things.
+
+Standard (using the same source for lightbox gallery):
+```HTML
+<div class="lightboxes">
+    <img src="1.JPG">
+</div>
+```
+Optional (using a different source for lightbox gallery):
+```HTML
+<div class="lightboxes">
+    <img src="1.JPG" lbs_high_res_src="1-highres.JPG">
+</div>
+```
+
 Usage notices:
 * Be aware that **LightboxeS** adds tags to the images. Keep in mind that all public JS has a 'lbs_' prefix and all CSS ids and classes start with 'lightboxes'.
 * You can change the appearance of the buttons by replacing the files. 
