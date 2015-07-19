@@ -72,11 +72,13 @@ That same code would give you something like that:
 
 Notice that the second gallery features 3 images although two of them are in an additional div. That's because it grabs all images within a single 'lightboxes' div, keep that in mind. This allows you to be free with your CSS.
 
-##Further Development
+##Further development
 * Hover effects for icons
 * Optional preview pics on the bottom
 * Optional 'progress' bar
 * Optional image hovering effect
 * *Making it faster on slower browsers*
+
+##Already done
 * ~~Rewriting the ugly resizing function~~
 * ~~Improvement of the (really ugly) scaling function~~
