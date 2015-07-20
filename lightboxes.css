@@ -41,6 +41,20 @@ Created by Daniel Swoboda - @snoato
     top: calc(50% - 20px);
     z-index: 100;
 }
+.lightboxesButton:hover {
+    -webkit-transition: -webkit-filter 100ms linear;
+    -moz-transition: filter 100ms linear;
+    -ms-transition: -ms-filter 100ms linear;
+    -o-transition: -o-filter 100ms linear;
+    
+    -webkit-filter: invert(0.7);
+    filter: invert(70%);
+    -ms-filter: invert(1);
+    -o-filter: invert(0.7);
+}
+.lightboxesButton:focus {
+     outline: 0;   
+}
 #lightboxesButtonBack {   
     background-image: url(lbs_arrow_back.png);
     left: 20px;
@@ -61,6 +75,20 @@ Created by Daniel Swoboda - @snoato
     right: 20px;
     height: 20px;
     width: 20px;
+}
+#lightboxesButtonClose:hover {
+    -webkit-transition: -webkit-filter 100ms linear;
+    -moz-transition: filter 100ms linear;
+    -ms-transition: -ms-filter 100ms linear;
+    -o-transition: -o-filter 100ms linear;
+    
+    -webkit-filter: invert(0.7);
+    filter: invert(70%);
+    -ms-filter: invert(70%);
+    -o-filter: invert(0.7);
+}
+#lightboxesButtonClose:focus {
+     outline: 0;   
 }
 #lightboxesLoading {
     position: absolute;
