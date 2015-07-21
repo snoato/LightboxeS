@@ -105,3 +105,31 @@ Created by Daniel Swoboda - @snoato
     width: 100%;
     top: calc(50% - 10px);
 }
+#lightboxesPreviewGallery {
+    height: 60px;
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    overflow: hidden;
+}
+.lightboxesPreviewImage {
+    height: 50px;
+    width: 50px;
+    margin-top: 3px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+    bottom: 3px;
+    border: 2px solid rgba(0,0,0,0);
+}
+.lightboxesPreviewImage:hover {  
+    border: 2px solid rgba(255,255,255,0.5);
+}
+.lightboxesPreviewImageHighlight {
+    border: 2px solid white;
+}
+.lightboxesPreviewImageHighlight:hover  {
+    border: 2px solid white;
+}

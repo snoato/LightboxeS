@@ -14,6 +14,9 @@ var lbs_imgIndex = 0;
 var lbs_images = null;
 ///array holding all lightboxes
 var lbs_lightboxes = document.getElementsByClassName('lightboxes');
+//to determine wheter a preview has to be shown or not
+var lbs_previewMode;
+
 
 //inits the lightboxes and adds tags needed
 function lbs_init() {
@@ -60,9 +63,35 @@ function lbs_dispose() {
 function lbs_pose(caller) {
     //get starting index from clicked image
     var lbs_lightboxindex = parseInt(caller.getAttribute("lbs_lbx_index"));
+    var lbs_currLightbox = lbs_lightboxes[lbs_lightboxindex];
     
     //add lightbox html
-    document.body.innerHTML = document.body.innerHTML + '<div id="lightboxesBox">\n<div id="lightboxesImgWrapper">\n<img class="lightboxesImg" id="lbs_currImg">\n</div>\n<div id="lightboxesLoading"><div id="lightboxesLoadingInner">Loading...</div></div>\n<button class="lightboxesButton" id="lightboxesButtonBack"></button>\n<button class="lightboxesButton" id="lightboxesButtonForward"></button>\n<button id="lightboxesButtonClose" onclick="lbs_dispose();"></button>\n</div>';
+    document.body.innerHTML = document.body.innerHTML + '<div id="lightboxesBox">\n'
+        + '<div id="lightboxesImgWrapper">\n'
+        + ' <img class="lightboxesImg" id="lbs_currImg">\n'
+        + '</div>\n'
+        + ' <div id="lightboxesLoading">\n'
+        + ' <div id="lightboxesLoadingInner">Loading...</div>\n'
+        + '</div>\n'
+        + '<button class="lightboxesButton" id="lightboxesButtonBack"></button>\n'
+        + '<button class="lightboxesButton" id="lightboxesButtonForward"></button>\n'
+        + '<button id="lightboxesButtonClose" onclick="lbs_dispose();"></button>\n'
+        + '<div id="lightboxesPreviewGallery"></div>'
+        + '</div>';
+    
+    //check if the preview attribute is set
+    var lbs_progressIndicator = lbs_currLightbox.getAttribute('lbs_progessIndicator');
+    var lbs_lightbox = document.getElementById("lightboxesBox");
+    if(lbs_progressIndicator == 'preview'){
+        lbs_previewMode = true;
+        document.getElementById('lightboxesImgWrapper').style.height = "calc(90% - 60px)";
+    } else {
+        lbs_previewMode = false;
+    }
+    if(lbs_progressIndicator == 'progressbar') {
+        //not yet implemented
+    }
+    
     
     //event listener
     document.body.addEventListener("keydown", lbs_keyEvent);//add key event listener
@@ -74,6 +103,9 @@ function lbs_pose(caller) {
     });
     window.addEventListener("resize", function() {
         lbs_resize(document.getElementById("lbs_currImg"));
+        if(lbs_previewMode){
+            lbs_preview();
+        }
     });
 
     //update global variables
@@ -163,7 +195,42 @@ function lbs_swap() {
         lbs_resize(document.getElementById("lbs_currImg"));
         document.getElementById("lightboxesLoading").style.display = "none";
     });  
+    
+    if(lbs_previewMode){
+        lbs_preview();
+    }
 }
+
+//generates a set of preview images for easier navgiation
+function lbs_preview(){
+    var lbs_previewGallery = document.getElementById('lightboxesPreviewGallery');
+    lbs_previewGallery.innerHTML = "";
+    
+    var lbs_prGalWidth = lbs_previewGallery.clientWidth;
+
+    var lbs_previewImages = "";
+    for(var i=0; i<lbs_images.length; i++){       
+        var leftPosition = (lbs_prGalWidth/2 - 30) - ((lbs_imgIndex - i)*60);
+        if(i == lbs_imgIndex){
+            lbs_previewImages += "<div  class='lightboxesPreviewImage lightboxesPreviewImageHighlight' style='background-image: url("+lbs_images[i]+"); left: "+leftPosition+"px'></div>";
+        } else {
+            lbs_previewImages += "<div class='lightboxesPreviewImage' style='background-image: url("+lbs_images[i]+"); left: "+leftPosition+"px' onclick='lbs_preview_swap("+i+")'></div>";
+        }
+    }
+    lbs_previewGallery.innerHTML = "<div id='lightboxesPreviewGalleryInner'>"+lbs_previewImages+"</div>";   
+}
+
+function lbs_preview_swap(lbs_swapIndex){
+    lbs_imgIndex = lbs_swapIndex;
+    lbs_swap();
+}
+
+//(not yet implemented)generates a kind of progress bar to see how many of the pictures in the galler you've seen
+function lbs_progressbar(){
+    
+    return "";
+}
+
 
 //original init
 lbs_init();
