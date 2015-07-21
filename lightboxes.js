@@ -49,7 +49,7 @@ function lbs_keyEvent(event){
 
 //removes the lightbox and reinits the images
 function lbs_dispose() {
-    document.body.removeEventListener("keyup", lbs_keyEvent);//remove key event listener
+    document.body.removeEventListener("keydown", lbs_keyEvent);//remove key event listener
     
     var lbs_box = document.getElementById("lightboxesBox");
     lbs_box.parentElement.removeChild(lbs_box);  
@@ -65,7 +65,7 @@ function lbs_pose(caller) {
     document.body.innerHTML = document.body.innerHTML + '<div id="lightboxesBox">\n<div id="lightboxesImgWrapper">\n<img class="lightboxesImg" id="lbs_currImg">\n</div>\n<div id="lightboxesLoading"><div id="lightboxesLoadingInner">Loading...</div></div>\n<button class="lightboxesButton" id="lightboxesButtonBack"></button>\n<button class="lightboxesButton" id="lightboxesButtonForward"></button>\n<button id="lightboxesButtonClose" onclick="lbs_dispose();"></button>\n</div>';
     
     //event listener
-    document.body.addEventListener("keyup", lbs_keyEvent);//add key event listener
+    document.body.addEventListener("keydown", lbs_keyEvent);//add key event listener
     document.getElementById("lightboxesButtonBack").addEventListener("click", function() {
         lbs_slide("back");
     }); 
