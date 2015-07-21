@@ -220,6 +220,7 @@ function lbs_preview(){
     lbs_previewGallery.innerHTML = "<div id='lightboxesPreviewGalleryInner'>"+lbs_previewImages+"</div>";   
 }
 
+//swap function used when a preview image is selected
 function lbs_preview_swap(lbs_swapIndex){
     lbs_imgIndex = lbs_swapIndex;
     lbs_swap();
