@@ -14,8 +14,10 @@ var lbs_imgIndex = 0;
 var lbs_images = null;
 ///array holding all lightboxes
 var lbs_lightboxes = document.getElementsByClassName('lightboxes');
-//to determine wheter a preview has to be shown or not
+//to determine wether a preview has to be shown or not
 var lbs_previewMode;
+//to determine wether a progess bar has to be shown or not
+var lbs_progressMode;
 
 
 //inits the lightboxes and adds tags needed
@@ -77,19 +79,29 @@ function lbs_pose(caller) {
         + '<button class="lightboxesButton" id="lightboxesButtonForward"></button>\n'
         + '<button id="lightboxesButtonClose" onclick="lbs_dispose();"></button>\n'
         + '<div id="lightboxesPreviewGallery"></div>'
+        + '<div id="lightboxesProgressBar">'
+        + ' <div id="lightboxesProgressBarIndicator"></div>'
+        + '</div>'
         + '</div>';
     
-    //check if the preview attribute is set
-    var lbs_progressIndicator = lbs_currLightbox.getAttribute('lbs_progessIndicator');
+    //check if the preview attribute is set and preparing chosen preview/progress mode
+    var lbs_progressIndicator = lbs_currLightbox.getAttribute('lbs_progressIndicator');
     var lbs_lightbox = document.getElementById("lightboxesBox");
     if(lbs_progressIndicator == 'preview'){
         lbs_previewMode = true;
         document.getElementById('lightboxesImgWrapper').style.height = "calc(90% - 60px)";
+        document.getElementById('lightboxesPreviewGallery').style.display = "block";
     } else {
         lbs_previewMode = false;
+        document.getElementById('lightboxesPreviewGallery').style.display = "none";
     }
     if(lbs_progressIndicator == 'progressbar') {
-        //not yet implemented
+        lbs_progressMode = true;
+        document.getElementById('lightboxesImgWrapper').style.height = "calc(90% - 10px)";
+        document.getElementById('lightboxesProgressBar').style.display = "block";
+    } else {
+        lbs_progressMode = false;
+        document.getElementById('lightboxesProgressBar').style.display = "none";
     }
     
     
@@ -198,6 +210,9 @@ function lbs_swap() {
     
     if(lbs_previewMode){
         lbs_preview();
+    }
+    if(lbs_progressMode){
+        document.getElementById('lightboxesProgressBarIndicator').style.width = ((lbs_imgIndex+1)*100)/lbs_imgCounter + "%";
     }
 }
 
