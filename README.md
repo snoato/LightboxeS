@@ -41,7 +41,22 @@ You can also add a progress indicator to the bottom of your gallery. Just add th
     <img src="1.JPG">
 </div>
 ```
-You can also combine these two attributes so that both a progress bar and a preview gallery are shown.
+
+####Info boxes
+![Infoboxes Demo](http://www.snoato.com/stuff/LightboxeS/InfoboxesDemo.png "Infoboxes Demo")
+With the optional info boxes it is possible to show your visitors more about a certain image. It's activated by setting the 'lbs_infoBox' attribute of the lightboxes div to true. When that's the case it looks for an image title stored in the optional 'lbs_infoboxTitle' attribute of the currently chosen image. If no such attribute exists, the source is taken as the title. 
+
+It will also look for an image description, this can either be stored within the 'lbs_infoboxDes' attribute, alternatively the alt text will be used or no description at all if that's non-existent as well.
+
+The info box will also show the original size of the image in the upper-right corner.
+```HTML
+<div class="lightboxes" lbs_infoBox="true">
+    <img src="1.JPG" alt="Picture 1.JPG of the Gallery">
+    <img src="2.JPG" lbs_infoboxTitle="Picture 1">
+    <img src="3.JPG" lbs_infoboxDes="Just another Image">
+</div>
+```
+#####You can use any combination of progress bars, gallery views and info boxes. 
 
 ####Usage notices:
 * Be aware that **LightboxeS** adds tags to the images. Keep in mind that all public JS has a 'lbs_' prefix and all CSS ids and classes start with 'lightboxes'.
