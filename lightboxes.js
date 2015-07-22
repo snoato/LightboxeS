@@ -86,8 +86,9 @@ function lbs_pose(caller) {
     
     //check if the preview attribute is set and preparing chosen preview/progress mode
     var lbs_progressIndicator = lbs_currLightbox.getAttribute('lbs_progressIndicator');
+    var lbs_previewGallery = lbs_currLightbox.getAttribute('lbs_previewGallery');
     var lbs_lightbox = document.getElementById("lightboxesBox");
-    if(lbs_progressIndicator == 'preview'){
+    if(lbs_previewGallery == 'true'){
         lbs_previewMode = true;
         document.getElementById('lightboxesImgWrapper').style.height = "calc(90% - 60px)";
         document.getElementById('lightboxesPreviewGallery').style.display = "block";
@@ -95,9 +96,12 @@ function lbs_pose(caller) {
         lbs_previewMode = false;
         document.getElementById('lightboxesPreviewGallery').style.display = "none";
     }
-    if(lbs_progressIndicator == 'progressbar') {
+    if(lbs_progressIndicator == 'true') {
         lbs_progressMode = true;
-        document.getElementById('lightboxesImgWrapper').style.height = "calc(90% - 10px)";
+        if(lbs_previewGallery == 'true'){
+            document.getElementById('lightboxesImgWrapper').style.height = "calc(90% - 70px)";
+            document.getElementById('lightboxesPreviewGallery').style.bottom = "10px";
+        }
         document.getElementById('lightboxesProgressBar').style.display = "block";
     } else {
         lbs_progressMode = false;
