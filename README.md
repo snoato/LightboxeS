@@ -1,5 +1,5 @@
 # LightboxeS
-![LightboxeS Logo](http://www.snoato.com/stuff/LightboxeS/LightboxeS01Logo.png "LightboxeS Logo")
+![LightboxeS Logo](http://www.snoato.com/stuff/LightboxeS/LightboxeS02Logo.png "LightboxeS Logo")
 **LightboxeS** is a simple JavaScript lightbox system, that's made as simple as it can be. Just put your images into a tag with the "lightboxes" class, add the lightboxes.js and the lightboxes.css and it's done. Users can navigate using on screen buttons as well as the arrow keys on the keyboard.
 
 It's that easy.
@@ -25,6 +25,24 @@ Optional (using a different source for lightbox gallery):
     <img src="1.JPG" lbs_high_res_src="1-highres.JPG">
 </div>
 ```
+
+####Preview Gallery
+*LightboxeS* gives you the possibility to show a preview gallery at the bottom of your lightbox. To use it you just have to add the 'lbs_previewGallery' attribute to your lightboxes div and set it to true. This again is completely optional.
+```HTML
+<div class="lightboxes" lbs_previewGallery="true">
+    <img src="1.JPG">
+</div>
+```
+
+####Progress Indicator
+You can also add a progress indicator to the bottom of your gallery. Just add the 'lbs_progressIndicator' attribute to your lightboxes div.
+```HTML
+<div class="lightboxes" lbs_progressIndicator="true">
+    <img src="1.JPG">
+</div>
+```
+You can also combine these two attributes so that both a progress bar and a preview gallery are shown.
+
 ####Usage notices:
 * Be aware that **LightboxeS** adds tags to the images. Keep in mind that all public JS has a 'lbs_' prefix and all CSS ids and classes start with 'lightboxes'.
 * You can change the appearance of the buttons by replacing the files. 
@@ -74,9 +92,6 @@ That same code would give you something like that:
 Notice that the second gallery features 3 images although two of them are in an additional div. That's because it grabs all images within a single 'lightboxes' div, keep that in mind. This allows you to be free with your CSS.
 
 ##Further development
-* Optional preview pics on the bottom
-* Optional 'progress' bar
-* Optional image hovering effect
 * Optional image title and description
 * *Making it faster on slower browsers*
 
@@ -84,3 +99,5 @@ Notice that the second gallery features 3 images although two of them are in an 
 * ~~Rewriting the ugly resizing function~~
 * ~~Improvement of the (really ugly) scaling function~~
 * ~~Hover effects for icons~~
+* ~~Optional preview pics on the bottom~~
+* ~~Optional 'progress' bar~~
