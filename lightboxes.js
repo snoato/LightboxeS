@@ -219,22 +219,28 @@ function lbs_slide(direction) {
     document.getElementById("lightboxesLoading").style.display = "block";
     if(direction == "forward" && lbs_imgIndex < lbs_imgCounter-1){
         lbs_imgIndex++;
-        if(lbs_imgIndex == lbs_imgCounter-1){
-             document.getElementById("lightboxesButtonForward").style.display = "none";
-        }
-        document.getElementById("lightboxesButtonBack").style.display = "block";
+        
     } else if(direction == "back" && lbs_imgIndex > 0){
         lbs_imgIndex--;
-        if(lbs_imgIndex==0){   
-            document.getElementById("lightboxesButtonBack").style.display = "none";
-        }
-        document.getElementById("lightboxesButtonForward").style.display = "block";
+        
     }
     lbs_swap();
 }
 
 //swaps the displayed image to the current image
 function lbs_swap() {
+    
+    if(lbs_imgIndex == lbs_imgCounter-1){
+        document.getElementById("lightboxesButtonForward").style.display = "none";
+    } else {
+        document.getElementById("lightboxesButtonForward").style.display = "block";
+    }
+    if(lbs_imgIndex==0){   
+        document.getElementById("lightboxesButtonBack").style.display = "none";
+    } else {
+        document.getElementById("lightboxesButtonBack").style.display = "block";
+    }
+    
     document.getElementById("lightboxesImgWrapper").innerHTML = '<img src="'+lbs_images[lbs_imgIndex]+'" class="lightboxesImg" id="lbs_currImg">';
     document.getElementById("lbs_currImg").addEventListener("load", function(){
         lbs_resize(document.getElementById("lbs_currImg"));
