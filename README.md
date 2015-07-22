@@ -100,7 +100,7 @@ The info box will also show the original size of the image in the upper-right co
         <!-- But you can also put in as many sub divs, etc as you will.
           LightboxeS just grabs the sources from all image tags within a 'lightboxes' class
           You can also add preview galliers, with an simple attribtue-->
-        <div class="lightboxes" lbs_previewGallery = "true">
+        <div class="lightboxes" lbs_previewGallery = "true" lbs_infoBox = "true">
             <div class="someDiv">
                 <img src="1.JPG">
                 <img src="2.JPG">
