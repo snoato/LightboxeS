@@ -1,8 +1,8 @@
 # LightboxeS
 ![LightboxeS Logo](http://www.snoato.com/stuff/LightboxeS/LightboxeS02Logo.png "LightboxeS Logo")
-**LightboxeS** is a simple JavaScript lightbox system, that's made as simple as it can be. Just put your images into a tag with the "lightboxes" class, add the lightboxes.js and the lightboxes.css and it's done. Users can navigate using on screen buttons as well as the arrow keys on the keyboard.
-
-It's that easy.
+**LightboxeS** is a simple JavaScript lightbox system, that's made for web developers to be as easy to integrate as possible. Just put your images into a tag with the "lightboxes" class, add the lightboxes.js and the lightboxes.css and it's done. Users can navigate using on screen buttons as well as the arrow keys on the keyboard.
+#####It's that easy.
+TLDR: It shows pictures and stuff in a fancy manner!
 
 ######Notice: This is an early version, that means the code is ugly and there are minor bugs with some browsers.
 #####Tested with: Chrome 43, Safari 8, Internet Explorer 11, Firefox 39, Vavaldi TP4
@@ -122,8 +122,8 @@ That same code would give you something like that:
 Notice that the second gallery features 3 images although two of them are in an additional div. That's because it grabs all images within a single 'lightboxes' div, keep that in mind. This allows you to be free with your CSS.
 
 ##Further development
-* Optional image title and description
-* *Making it faster on slower browsers*
+* *Making it faster on browsers that execute LightboxeS slow* - I talk to you Safari 
+* Maybe changing the custom attributes to include the 'data-' prefix to be more rule conform
 
 ##Already done
 * ~~Rewriting the ugly resizing function~~
@@ -131,3 +131,4 @@ Notice that the second gallery features 3 images although two of them are in an 
 * ~~Hover effects for icons~~
 * ~~Optional preview pics on the bottom~~
 * ~~Optional 'progress' bar~~
+* ~~Optional image title and description~~
