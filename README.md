@@ -71,13 +71,27 @@ You can also combine these two attributes so that both a progress bar and a prev
             <img src="3.JPG">
         </div>
         
+        <br>
+        
+        <div class="lightboxes" lbs_progressIndicator = "true">
+            <img src="4.JPG">
+            <img src="5.JPG">
+            <img src="6.JPG">
+        </div>
+        
+        <br>
+        
         <!-- But you can also put in as many sub divs, etc as you will.
-          LightboxeS just grabs the sources from all image tags within a 'lightboxes' class-->
-        <div class="lightboxes">
+          LightboxeS just grabs the sources from all image tags within a 'lightboxes' class
+          You can also add preview galliers, with an simple attribtue-->
+        <div class="lightboxes" lbs_previewGallery = "true">
             <div class="someDiv">
-                <img src="4.JPG">
-                <img src="5.JPG">
+                <img src="1.JPG">
+                <img src="2.JPG">
             </div>
+            <img src="3.JPG">
+            <img src="4.JPG">
+            <img src="5.JPG">
             <img src="6.JPG">
         </div>
     </body>
