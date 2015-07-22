@@ -122,6 +122,8 @@ That same code would give you something like that:
 Notice that the second gallery features 3 images although two of them are in an additional div. That's because it grabs all images within a single 'lightboxes' div, keep that in mind. This allows you to be free with your CSS.
 
 ##Further development
+* Fancy animations
+* Touch gesture support
 * *Making it faster on browsers that execute LightboxeS slow* - I talk to you Safari 
 * Maybe changing the custom attributes to include the 'data-' prefix to be more rule conform
 
