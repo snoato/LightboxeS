@@ -73,6 +73,7 @@ You can also combine these two attributes so that both a progress bar and a prev
         
         <br>
         
+        <!-- With progress bar -->
         <div class="lightboxes" lbs_progressIndicator = "true">
             <img src="4.JPG">
             <img src="5.JPG">
