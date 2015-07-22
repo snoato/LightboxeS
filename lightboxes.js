@@ -14,11 +14,16 @@ var lbs_imgIndex = 0;
 var lbs_images = null;
 ///array holding all lightboxes
 var lbs_lightboxes = document.getElementsByClassName('lightboxes');
+//index of the current lightbox
+var lbs_lightboxindex = 0;
 //to determine wether a preview has to be shown or not
 var lbs_previewMode;
 //to determine wether a progess bar has to be shown or not
 var lbs_progressMode;
-
+//to dtermine wether infobox is activated or not
+var lbs_infoboxMode;
+//to determine wether infobox is currently displayed or not 
+var lbs_infoboxShowing;
 
 //inits the lightboxes and adds tags needed
 function lbs_init() {
@@ -64,7 +69,7 @@ function lbs_dispose() {
 //shows a new lightbox starting with the given caller (a lightbox img)
 function lbs_pose(caller) {
     //get starting index from clicked image
-    var lbs_lightboxindex = parseInt(caller.getAttribute("lbs_lbx_index"));
+    lbs_lightboxindex = parseInt(caller.getAttribute("lbs_lbx_index"));
     var lbs_currLightbox = lbs_lightboxes[lbs_lightboxindex];
     
     //add lightbox html
@@ -77,10 +82,18 @@ function lbs_pose(caller) {
         + '</div>\n'
         + '<button class="lightboxesButton" id="lightboxesButtonBack"></button>\n'
         + '<button class="lightboxesButton" id="lightboxesButtonForward"></button>\n'
-        + '<button id="lightboxesButtonClose" onclick="lbs_dispose();"></button>\n'
+        + '<button id="lightboxesButtonClose" onmousedown="lbs_dispose();"></button>\n'
         + '<div id="lightboxesPreviewGallery"></div>'
         + '<div id="lightboxesProgressBar">'
         + ' <div id="lightboxesProgressBarIndicator"></div>'
+        + '</div>'
+        + '<div id="lightboxesImageInfo">'
+        + ' <div id="lightboxesImageInfoSlider"></div>'
+        + ' <div id="lightboxesImageInfoText">'
+        + '     <div id="lightboxesImageInfoHeadline"></div>'
+        + '     <div id="lightboxesImageInfoSize"></div>'
+        + '     <div id="lightboxesImageInfoDescr"></div>'
+        + ' </div>'
         + '</div>'
         + '</div>';
     
@@ -98,7 +111,7 @@ function lbs_pose(caller) {
     }
     if(lbs_progressIndicator == 'true') {
         lbs_progressMode = true;
-        if(lbs_previewGallery == 'true'){
+        if( lbs_previewMode){
             document.getElementById('lightboxesImgWrapper').style.height = "calc(90% - 70px)";
             document.getElementById('lightboxesPreviewGallery').style.bottom = "10px";
         }
@@ -109,18 +122,34 @@ function lbs_pose(caller) {
     }
     
     
+    //checks and initialization for info box
+    var lbs_infoBox = lbs_currLightbox.getAttribute('lbs_infoBox');
+    if(lbs_infoBox == 'true'){
+        lbs_infoboxMode = true;
+        document.getElementById("lightboxesImageInfoSlider").addEventListener("click", lbs_infoBoxClickEventListener);
+        lbs_infoboxShowing = false;
+        lbs_infoboxVisibility();
+        
+    } else {
+        lbs_infoboxMode = false;
+        document.getElementById("lightboxesImageInfo").style.display = "none";
+    }
+    
     //event listener
     document.body.addEventListener("keydown", lbs_keyEvent);//add key event listener
-    document.getElementById("lightboxesButtonBack").addEventListener("click", function() {
+    document.getElementById("lightboxesButtonBack").addEventListener("mousedown", function() {
         lbs_slide("back");
     }); 
-    document.getElementById("lightboxesButtonForward").addEventListener("click", function() {
+    document.getElementById("lightboxesButtonForward").addEventListener("mousedown", function() {
         lbs_slide("forward");
     });
     window.addEventListener("resize", function() {
         lbs_resize(document.getElementById("lbs_currImg"));
         if(lbs_previewMode){
             lbs_preview();
+        }
+        if(lbs_infoboxMode){
+            lbs_infoboxVisibility();   
         }
     });
 
@@ -141,7 +170,7 @@ function lbs_pose(caller) {
 } 
 
 //gets the sources of all images within the given lightbox
-function lbs_getSource(lbs_lightboxindex) {
+function lbs_getSource() {
     var lbs_pictures = lbs_lightboxes[lbs_lightboxindex].getElementsByTagName('img');
     var lbs_images = Array();
     for(var i=0; i<lbs_pictures.length; i++){
@@ -169,8 +198,8 @@ function lbs_resize(img) {
         width = parseInt((w.innerWidth || e.clientWidth || g.clientWidth)),
         height = parseInt((w.innerHeight|| e.clientHeight|| g.clientHeight));
     
-    var wrapperWidth = width*0.9;
-    var wrapperHeight = height*0.9;
+    var wrapperWidth = parseInt(imgWrapper.clientWidth);
+    var wrapperHeight = parseInt(imgWrapper.clientHeight);
     
     if(imgHeight/imgWidth < wrapperHeight/wrapperWidth) {
         img.style.width = "100%";
@@ -218,6 +247,10 @@ function lbs_swap() {
     if(lbs_progressMode){
         document.getElementById('lightboxesProgressBarIndicator').style.width = ((lbs_imgIndex+1)*100)/lbs_imgCounter + "%";
     }
+    if(lbs_infoboxMode){
+        lbs_infoboxDataUpdate();
+        lbs_infoboxVisibility();
+    }
 }
 
 //generates a set of preview images for easier navgiation
@@ -245,12 +278,72 @@ function lbs_preview_swap(lbs_swapIndex){
     lbs_swap();
 }
 
-//(not yet implemented)generates a kind of progress bar to see how many of the pictures in the galler you've seen
-function lbs_progressbar(){
-    
-    return "";
+//event listener for click on infobox
+ function lbs_infoBoxClickEventListener(){     
+    if(lbs_infoboxShowing){
+        document.getElementById("lightboxesImageInfoSlider").className = "";
+        lbs_infoboxShowing = false;
+    } else {
+        document.getElementById("lightboxesImageInfoSlider").className = "lightboxesImageInfoSliderTilt";  
+        lbs_infoboxShowing = true;
+    }
+    lbs_infoboxVisibility();
 }
 
+//handles the shift of all elements according to the infobox visibility
+function lbs_infoboxVisibility(){
+    var lbs_infoBox_height = document.getElementById("lightboxesImageInfoText").clientHeight;
+    if(lbs_infoboxShowing){
+        if(lbs_previewMode && lbs_progressMode){
+            document.getElementById('lightboxesImgWrapper').style.height = "calc(90% - "+(90+lbs_infoBox_height)+"px)";
+            document.getElementById('lightboxesPreviewGallery').style.bottom = (30+lbs_infoBox_height)+"px";
+            document.getElementById('lightboxesProgressBar').style.bottom = (20+lbs_infoBox_height)+"px";
+        }else if(lbs_progressMode){
+            document.getElementById('lightboxesImgWrapper').style.height = "calc(90% - "+(30+lbs_infoBox_height)+"px)";
+            document.getElementById('lightboxesProgressBar').style.bottom = (20+lbs_infoBox_height)+"px";
+        }else if(lbs_previewMode){
+            document.getElementById('lightboxesImgWrapper').style.height = "calc(90% - "+(80+lbs_infoBox_height)+"px)";
+            document.getElementById('lightboxesPreviewGallery').style.bottom = (20+lbs_infoBox_height)+"px";
+        }
+        
+        document.getElementById("lightboxesImageInfo").style.bottom = "0px";
+    } else {
+        if(lbs_previewMode && lbs_progressMode){
+            document.getElementById('lightboxesImgWrapper').style.height = "calc(90% - "+(90)+"px)";
+            document.getElementById('lightboxesPreviewGallery').style.bottom = (30)+"px";
+            document.getElementById('lightboxesProgressBar').style.bottom = (20)+"px";
+        }else if(lbs_progressMode){
+            document.getElementById('lightboxesImgWrapper').style.height = "calc(90% - "+(30)+"px)";
+            document.getElementById('lightboxesProgressBar').style.bottom = (20)+"px";
+        }else if(lbs_previewMode){
+            document.getElementById('lightboxesImgWrapper').style.height = "calc(90% - "+(80)+"px)";
+            document.getElementById('lightboxesPreviewGallery').style.bottom = (20)+"px";
+        }
+        document.getElementById("lightboxesImageInfo").style.bottom = -lbs_infoBox_height+"px";
+    }
+}
+
+//reads in the data from the currently displayed picture and fills the infobox with it
+function lbs_infoboxDataUpdate(){
+    var lbs_currPic = lbs_lightboxes[lbs_lightboxindex].getElementsByTagName('img')[lbs_imgIndex];
+    if(lbs_currPic.getAttribute("lbs_infoboxTitle") != null){
+        document.getElementById("lightboxesImageInfoHeadline").innerHTML = lbs_currPic.getAttribute("lbs_infoboxTitle");
+    } else {
+        document.getElementById("lightboxesImageInfoHeadline").innerHTML = lbs_currPic.getAttribute("src");
+    }
+    
+    if(lbs_currPic.getAttribute("lbs_infoboxDesc") != null){
+        document.getElementById("lightboxesImageInfoDescr").innerHTML = lbs_currPic.getAttribute("lbs_infoboxDesc");
+    } else if(lbs_currPic.getAttribute("alt") != null){
+        document.getElementById("lightboxesImageInfoDescr").innerHTML = lbs_currPic.getAttribute("alt");
+    } else {
+        document.getElementById("lightboxesImageInfoDescr").innerHTML = "";
+    }
+    
+    var lbs_imageObject = new Image();
+    lbs_imageObject.src = lbs_currPic.getAttribute("src");
+    document.getElementById("lightboxesImageInfoSize").innerHTML =  lbs_imageObject.width+"x"+lbs_imageObject.height;
+}
 
 //original init
 lbs_init();

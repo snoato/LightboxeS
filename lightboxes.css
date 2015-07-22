@@ -145,3 +145,53 @@ Created by Daniel Swoboda - @snoato
     height: 100%;
     background-color: dodgerblue;
 }
+#lightboxesImageInfo {
+    width: 100%;
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    background-color: rgba(255,255,255,0.05);
+}
+#lightboxesImageInfoSlider {
+    height: 16px;
+    border-bottom: 2px solid rgba(0,0,0,0.2);
+    border-top: 2px solid rgba(0,0,0,0.2);
+    background-image: url(lbs_infobox_arrow.png);
+    background-size: 14px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.lightboxesImageInfoSliderTilt {
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+#lightboxesImageInfoSlider:hover {
+    -webkit-transition: background-color 100ms linear;
+    -moz-transition: background-color 100ms linear;
+    -ms-transition: background-color 100ms linear;
+    -o-transition: background-color 100ms linear;
+
+    background-color: rgba(255,255,255,0.1);
+}
+#lightboxesImageInfoText {
+    padding: 4px 10px 4px 10px;   
+    font-family: sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    color: white;
+}
+#lightboxesImageInfoHeadline {
+    font-size: 1.2em;
+    font-weight: 400;
+    float: left;
+}
+#lightboxesImageInfoSize {
+    font-size: 1.2em;
+    float: right;
+}
+#lightboxesImageInfoDescr {
+    margin-top: 22px;
+}
