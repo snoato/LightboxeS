@@ -25,6 +25,13 @@ Optional (using a different source for lightbox gallery):
     <img src="1.JPG" lbs_high_res_src="1-highres.JPG">
 </div>
 ```
+There is a third possibility which comes in handy if you use for example Wordpress as your CMS where the URLs to the original sized files is stored in a surrounding a-tag. Just use the 'lbs_altHighResSourceMode' attribute in that case and set it to 'true'. If no a-tag surrounds one of your pictures within the lightboxes div, it will use the src of the img tag instead.
+```HTML
+<div class="lightboxes" lbs_altHighResSourceMode="true">
+    <a href="1-highres.JPG">
+        <img src="1.JPG">
+    </a>
+</div>
 
 ####Preview Gallery
 *LightboxeS* gives you the possibility to show a preview gallery at the bottom of your lightbox. To use it you just have to add the 'lbs_previewGallery' attribute to your lightboxes div and set it to true. This again is completely optional.
