@@ -32,6 +32,7 @@ There is a third possibility which comes in handy if you use for example Wordpre
         <img src="1.JPG">
     </a>
 </div>
+```
 
 ####Preview Gallery
 *LightboxeS* gives you the possibility to show a preview gallery at the bottom of your lightbox. To use it you just have to add the 'lbs_previewGallery' attribute to your lightboxes div and set it to true. This again is completely optional.
