@@ -387,7 +387,7 @@ function lbs_infoboxDataUpdate(){
     }
     
     var lbs_imageObject = new Image();
-    lbs_imageObject.src = lbs_currPic.getAttribute("src");
+    lbs_imageObject.src = lbs_images[lbs_imgIndex];
     document.getElementById("lightboxesImageInfoSize").innerHTML =  lbs_imageObject.width+"x"+lbs_imageObject.height;
 }
 
