@@ -52,6 +52,24 @@ function lbs_keyEvent(event){
     case 27://esc key
         lbs_dispose();
         break;
+    case 38:
+        if(lbs_infoboxMode){
+            if(!lbs_infoboxShowing){
+                document.getElementById("lightboxesImageInfoSlider").className = "lightboxesImageInfoSliderTilt";  
+                lbs_infoboxShowing = true;
+            }
+            lbs_infoboxVisibility();
+        }  
+        break;
+    case 40:
+        if(lbs_infoboxMode){
+            if(lbs_infoboxShowing){
+                document.getElementById("lightboxesImageInfoSlider").className = "";
+                lbs_infoboxShowing = false;
+            }
+            lbs_infoboxVisibility();
+        }     
+        break;
     default:
         return;
     }
