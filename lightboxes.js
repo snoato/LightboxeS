@@ -24,6 +24,9 @@ var lbs_progressMode;
 var lbs_infoboxMode;
 //to determine wether infobox is currently displayed or not 
 var lbs_infoboxShowing;
+//to determine wether alternative high res image source mode is active or not
+var lbs_altHighResSourceMode;
+
 
 //inits the lightboxes and adds tags needed
 function lbs_init() {
@@ -153,6 +156,12 @@ function lbs_pose(caller) {
         document.getElementById("lightboxesImageInfo").style.display = "none";
     }
     
+    if(lbs_currLightbox.getAttribute("lbs_altHighResSourceMode") == 'true'){
+        lbs_altHighResSourceMode = true;
+    } else {
+        lbs_altHighResSourceMode = false;
+    }
+    
     //event listener
     document.body.addEventListener("keydown", lbs_keyEvent);//add key event listener
     document.getElementById("lightboxesButtonBack").addEventListener("mousedown", function() {
@@ -193,10 +202,23 @@ function lbs_getSource() {
     var lbs_images = Array();
     for(var i=0; i<lbs_pictures.length; i++){
         var lbs_curr_pic = lbs_pictures[i];
-        if(lbs_curr_pic.getAttribute('lbs_high_res_src') == null){
-            lbs_images.push(lbs_curr_pic.getAttribute('src'));  
+        if(lbs_altHighResSourceMode){
+            if(lbs_curr_pic.parentElement.tagName == 'A'){
+                var lbs_source = lbs_curr_pic.parentElement.getAttribute('href');
+                if(lbs_source != null && lbs_source != ""){    
+                    lbs_images.push(lbs_source); 
+                } else {
+                    lbs_images.push(lbs_curr_pic.getAttribute('src'));  
+                }
+            } else {
+                lbs_images.push(lbs_curr_pic.getAttribute('src'));  
+            }
         } else {
-            lbs_images.push(lbs_curr_pic.getAttribute('lbs_high_res_src'));
+            if(lbs_curr_pic.getAttribute('lbs_high_res_src') == null){
+                lbs_images.push(lbs_curr_pic.getAttribute('src'));  
+            } else {
+                lbs_images.push(lbs_curr_pic.getAttribute('lbs_high_res_src'));
+            }
         }
     }
     return lbs_images;
